@@ -1,4 +1,4 @@
-package tech.bts.onlineshop;
+package tech.bts.onlineshop.model;
 
 public class Product {
 
