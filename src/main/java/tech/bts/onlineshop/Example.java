@@ -31,6 +31,9 @@ public class Example {
         ShoppingCart cart = new ShoppingCart(items2);
 
         PurchaseService purchaseService = new PurchaseService();
-        purchaseService.calculateTotalAmount(cart);
+
+        double total = purchaseService.calculateTotalAmount(cart);
+
+        System.out.println("total = " + total);
     }
 }
