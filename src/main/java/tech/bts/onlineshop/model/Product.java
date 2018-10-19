@@ -4,16 +4,23 @@ public class Product {
 
     private long id;
     private String name;
+    private String brand;
     private double price;
     private boolean available;
 
     public final static long NOT_SPECIFIED = -1;
 
-    public Product(String name, double price) {
+    public Product(String name, String brand, double price) {
         this.id = NOT_SPECIFIED;
         this.name = name;
+        this.brand = brand;
         this.price = price;
         this.available = true;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + ": " + this.price + "€";
     }
 
     public long getId() {
@@ -30,6 +37,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public double getPrice() {
