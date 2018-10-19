@@ -1,12 +1,15 @@
 package tech.bts.onlineshop;
 
 import tech.bts.onlineshop.business.PurchaseService;
+import tech.bts.onlineshop.data.ProductDatabase;
 import tech.bts.onlineshop.model.CartItem;
 import tech.bts.onlineshop.model.Product;
 import tech.bts.onlineshop.model.ShoppingCart;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Example {
 
@@ -15,6 +18,17 @@ public class Example {
         Product p1 = new Product("MacBook", 1500);
         Product p2 = new Product("iPhone xs", 1200);
         Product p3 = new Product("Pixel 3", 900);
+
+        ProductDatabase productDatabase = new ProductDatabase();
+        productDatabase.add(p1);
+        productDatabase.add(p2);
+        productDatabase.add(p3);
+
+        Product product = productDatabase.get(3);
+        System.out.println("The name of the product is: " + product.getName());
+
+        int count = productDatabase.getCount();
+        System.out.println("I have " + count + " products in the database");
 
         List<CartItem> items = Arrays.asList(
                 new CartItem(p1, 2),
@@ -26,6 +40,6 @@ public class Example {
         PurchaseService purchaseService = new PurchaseService();
 
         double total = purchaseService.calculateTotalAmount(cart);
-        System.out.println("total = " + total);
+        System.out.println("Total amount of cart: " + total);
     }
 }
