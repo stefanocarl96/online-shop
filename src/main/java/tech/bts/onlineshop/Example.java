@@ -1,6 +1,6 @@
 package tech.bts.onlineshop;
 
-import tech.bts.onlineshop.business.PurchaseService;
+import tech.bts.onlineshop.business.ProductService;
 import tech.bts.onlineshop.data.ProductDatabase;
 import tech.bts.onlineshop.model.CartItem;
 import tech.bts.onlineshop.model.Product;
@@ -14,8 +14,11 @@ public class Example {
     public static void main(String[] args) {
 
         Product p1 = new Product("MacBook", "Apple", 1500);
-        Product p2 = new Product("iPhone xs", "Apple", 1200);
-        Product p3 = new Product("Pixel 3", "Google", 900);
+        Product p2 = new Product("iPhone xs", "Apple", 13
+
+
+                00);
+        Product p3 = new Product("Pixel 3", "Google", 500);
 
         ProductDatabase productDatabase = new ProductDatabase();
         productDatabase.add(p1);
@@ -37,25 +40,31 @@ public class Example {
             System.out.println(p.getName() + ", " + p.getBrand() + ", " + p.getPrice());
         }
 
-        List<Product> under1000 = productDatabase.getByPriceRange(500, 1000);
+        List<Product> under1000 = productDatabase.getByPriceRange(500, 1300);
         System.out.println("Products under 1000: " + under1000);
         for (Product p : under1000) {
             System.out.println(p.getName() + ", " + p.getBrand() + ", " + p.getPrice());
         }
 
-        System.out.println("I will remove the Macbook");
-        System.out.println(productDatabase.remove(1));
+        System.out.println("All products after removing:");
+        Collection<Product> allProducts = productDatabase.getAll();
+        for (Product p : allProducts) {
+            System.out.println(p);
+        }
 
-        List<CartItem> items = Arrays.asList(
-                new CartItem(p1, 2),
-                new CartItem(p2, 3),
-                new CartItem(p3, 1));
+        Product p4 = new Product("lightning cable", "Apple", 10);
+        productDatabase.add(p4);
 
-        ShoppingCart cart = new ShoppingCart(items);
+        System.out.println("Number of products now: " + productDatabase.getCount());
 
-        PurchaseService purchaseService = new PurchaseService();
 
-        double total = purchaseService.calculateTotalAmount(cart);
-        System.out.println("Total amount of cart: " + total);
-    }
+        long requestedId = 2 :
+        Product requestedProduct = productDatabase.get(requestedId);
+
+        if (requestedId == null ) {
+            System.out.println("The product with ID" + requestedId+ "doesn't exist");
+        } else {
+            System.out.println("The name of the product is" + requestedProduct.getName());
+        }
+
 }
