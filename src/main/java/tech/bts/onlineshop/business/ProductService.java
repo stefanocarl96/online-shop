@@ -32,11 +32,7 @@ public class ProductService {
     public boolean controlAvailability(long productId, int quantity) {
 
         Product product = this.productDatabase.get(productId);
-        if (quantity <= product.getQuantity()) {
-            return true;
-        } else {
-            return false;
-        }
+        return quantity <= product.getQuantity();
     }
 
     public int possibletoDeliver(long productId, int quantity) {
