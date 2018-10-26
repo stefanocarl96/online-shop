@@ -2,10 +2,7 @@ package tech.bts.onlineshop.data;
 
 import tech.bts.onlineshop.model.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProductDatabase {
 
@@ -17,11 +14,12 @@ public class ProductDatabase {
         this.productMap = new HashMap<>();
     }
 
-    public void add(Product product) {
+    public long add(Product product) {
 
         product.setId(this.nextId);
         productMap.put(product.getId(), product);
         this.nextId++;
+        return product.getId();
     }
 
     public Product get(long id) {
@@ -52,12 +50,19 @@ public class ProductDatabase {
 
     // TODO: method remove, given an id, removes that product from the database
 
-    public Map<Long, Product> remove(long id) {
-
-        Map<Long, Product> result = this.productMap;
-        result.remove(id);
-        return result;
+    public Product remove(long id) {
+        productMap.remove(id);
     }
+
+    //TODO: Get all method
+
+    public Collection<Product> getAll() {
+
+       return productMap.values();
+    }
+
+
+
 
 
     public List<Product> getByBrand(String brand) {

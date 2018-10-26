@@ -1,9 +1,8 @@
 package tech.bts.onlineshop.business;
 
+import tech.bts.onlineshop.CartItem;
 import tech.bts.onlineshop.data.ProductDatabase;
-import tech.bts.onlineshop.model.CartItem;
 import tech.bts.onlineshop.model.Product;
-import tech.bts.onlineshop.model.ShoppingCart;
 
 public class ProductService {
 
@@ -23,6 +22,10 @@ public class ProductService {
         product.setQuantity(total);
     }
 
+    public int getCount() {
+       return productDatabase.getCount();
+    }
+
     public Product getById(long productId) {
 
         Product product = this.productDatabase.get(productId);
@@ -38,11 +41,21 @@ public class ProductService {
     public int possibletoDeliver(long productId, int quantity) {
 
         Product product = this.productDatabase.get(productId);
-        if (quantity <= product.getQuantity()) {
-            return quantity;
-        } else {
-            return product.getQuantity();
+
+        long possibleQuantityToDeliver = Math.min(product.getQuantity(), quantity);
+        return Math.min(product.getQuantity(), quantity);
+
+        /** Reduces the quantities of the products by the quantities in the cart */
+        public void purchase(Shoppingcart cart);
+
+        for (CartItem item : cart.getItems()) {
+            Product product = productDatabase.get(item.getproductid());
+            int remainingQuantity = product.getQuantity() - item.getQuantity();
+            product.setQuantity(remainingQuantity);
         }
+
+
+
     }
 
 }

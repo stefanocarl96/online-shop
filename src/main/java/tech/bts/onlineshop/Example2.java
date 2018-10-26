@@ -3,10 +3,14 @@ package tech.bts.onlineshop;
 import tech.bts.onlineshop.business.ProductService;
 import tech.bts.onlineshop.data.ProductDatabase;
 import tech.bts.onlineshop.model.Product;
+import tech.bts.onlineshop.model.ShoppingCart;
 
 public class Example2 {
 
-    public static void main(String[] args) {
+    private static Object pixelId
+            ;
+
+    public static <cartItem> void main(String[] args) {
 
         ProductDatabase productDatabase = new ProductDatabase();
         ProductService p1 = new ProductService(productDatabase);
@@ -27,6 +31,19 @@ public class Example2 {
         System.out.println(availability);
 
         System.out.println(p1.possibletoDeliver(requestedId,requestedQuantity));
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.add(new cartItem(iphoneID, 20));
+        cart.add(new cartItem(pixelId, 50));
+
+        productService.purchase(cart);
+
+        Product iPhone = productService,getProductById(iphoneID);
+        System.out.println("Expected 280 --->" + iPhone.getQuantity());
+
+
+
+
 
     }
 }
