@@ -1,37 +1,28 @@
 package tech.bts.onlineshop.model;
 
-import tech.bts.onlineshop.CartItem;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * One product and the quantity to purchase.
+ * The items to be purchased.
  */
 public class ShoppingCart {
 
-    private List<CartItem> items;
+    private List<tech.bts.onlineshop.model.CartItem> items;
 
-    public  ShoppingCart() {
+    public ShoppingCart() {
         this.items = new ArrayList<>();
     }
 
+    public ShoppingCart(List<tech.bts.onlineshop.model.CartItem> items) {
+        this.items = items;
+    }
 
-    public List<CartItem> getitems() { return items; }
+    public List<tech.bts.onlineshop.model.CartItem> getItems() {
+        return items;
+    }
 
-    public void add(CartItem item)        {
+    public void add(tech.bts.onlineshop.model.CartItemtem item) {
         items.add(item);
-            }
     }
-
-
-
-
-
-
-
 }
-
-    public void add(CartItem item1) {
-
-    }

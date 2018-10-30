@@ -56,13 +56,7 @@ public class Product {
     }
 
     public boolean isAvailable() {
-
         return this.quantity > 0;
-
-        
-
-
-
     }
 
     public int getQuantity() {

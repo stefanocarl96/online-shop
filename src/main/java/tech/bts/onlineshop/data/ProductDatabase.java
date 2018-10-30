@@ -14,6 +14,7 @@ public class ProductDatabase {
         this.productMap = new HashMap<>();
     }
 
+    /** Adds a product to the database and returns the id that was set to it */
     public long add(Product product) {
 
         product.setId(this.nextId);
@@ -33,37 +34,34 @@ public class ProductDatabase {
         return productMap.size();
     }
 
-    // TODO: method getByPriceRange, given 2 prices (minPrice, maxPrice) returns a list
-    // of products that are in that price range (included)
+    /**
+     * Given an id, removes that product from the database.
+     */
+    public void remove(long id) {
 
+        productMap.remove(id);
+    }
+
+    public Collection<Product> getAll() {
+
+        return productMap.values();
+    }
+
+    /**
+     * Given 2 prices (min, max) returns a list of products that are in that price range (included)
+     */
     public List<Product> getByPriceRange(double min, double max) {
 
         List<Product> result = new ArrayList<>();
 
         for (Product product : productMap.values()) {
-            if (product.getPrice() >= min && product.getPrice() <= max ) {
+            if (product.getPrice() >= min && product.getPrice() <= max) {
                 result.add(product);
             }
         }
+
         return result;
     }
-
-    // TODO: method remove, given an id, removes that product from the database
-
-    public Product remove(long id) {
-        productMap.remove(id);
-    }
-
-    //TODO: Get all method
-
-    public Collection<Product> getAll() {
-
-       return productMap.values();
-    }
-
-
-
-
 
     public List<Product> getByBrand(String brand) {
 
@@ -77,6 +75,7 @@ public class ProductDatabase {
 
         return result;
     }
+
 
     public int getCountByBrand(String brand) {
 

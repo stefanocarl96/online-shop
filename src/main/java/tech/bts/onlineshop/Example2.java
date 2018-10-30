@@ -1,51 +1,55 @@
 package tech.bts.onlineshop;
 
+import tech.bts.onlineshop.business.DiscountService;
 import tech.bts.onlineshop.business.ProductService;
 import tech.bts.onlineshop.data.ProductDatabase;
+import tech.bts.onlineshop.model.CartItem;
+import tech.bts.onlineshop.model.Discount;
 import tech.bts.onlineshop.model.Product;
 import tech.bts.onlineshop.model.ShoppingCart;
 
 public class Example2 {
 
-    private static Object pixelId
-            ;
-
-    public static <cartItem> void main(String[] args) {
+    public static void main(String[] args) {
 
         ProductDatabase productDatabase = new ProductDatabase();
-        ProductService p1 = new ProductService(productDatabase);
 
-        long macBookId = p1.createProduct(new Product("MacBook", "Apple", 1400));
-        long iphoneID = p1.createProduct(new Product("iPhone xs", "Apple", 1000));
+        ProductService productService = new ProductService(productDatabase);
+        long xiaomiId = productService.createProduct(new Product("A1", "Xiaomi", 250));
+        long iPhoneId = productService.createProduct(new Product("iPhone XS", "Apple", 1250));
+        long pixelId = productService.createProduct(new Product("Pixel 3", "Google", 900));
 
-        p1.addProductStock(macBookId,200);
-        p1.addProductStock(iphoneID, 300);
-        p1.addProductStock(macBookId,100);
+        productService.addProductStock(iPhoneId, 100);
+        productService.addProductStock(iPhoneId, 200);
+        productService.addProductStock(pixelId, 150);
 
-        long requestedId = macBookId;
-        Product requestedProduct = p1.getById(requestedId);
-        System.out.println("There are " + requestedProduct.getQuantity() + " units of " + requestedProduct.getName() + " in stock");
-
-        int requestedQuantity = 20;
-        boolean availability = p1.controlAvailability(requestedId,requestedQuantity);
-        System.out.println(availability);
-
-        System.out.println(p1.possibletoDeliver(requestedId,requestedQuantity));
+        Product p = productService.getProductById(xiaomiId);
+        System.out.println("There are " + p.getQuantity() + " units of " + p.getName() + " in stock");
 
         ShoppingCart cart = new ShoppingCart();
-        cart.add(new cartItem(iphoneID, 20));
-        cart.add(new cartItem(pixelId, 50));
+        cart.add(new CartItem(iPhoneId, 20));
+        cart.add(new CartItem(pixelId, 50));
 
         productService.purchase(cart);
 
-        Product iPhone = productService,getProductById(iphoneID);
-        System.out.println("Expected 280 --->" + iPhone.getQuantity());
+        Product iPhone = productService.getProductById(iPhoneId);
+        System.out.println("Expected 280 ---> " + iPhone.getQuantity());
 
+        Product pixel = productService.getProductById(pixelId);
+        System.out.println("Expected 100 ---> " + pixel.getQuantity());
 
+        Product xiaomi = productService.getProductById(xiaomiId);
+        System.out.println("Expected 0 ---> " + xiaomi.getQuantity());
 
+        Discount discount1 = new Discount("WINTERDISCOUNT","Winter discount",16, true);
+        Discount discount2 = new Discount("COUPONS","Coupons",40, false);
 
+        DiscountService discountService = new DiscountService();
 
+        discountService.createDiscount(discount1);
+        discountService.createDiscount(discount2);
+
+        System.out.println(discountService.calculateFinalAmount(discount1.getId(), 100));
+        System.out.println(discountService.calculateFinalAmount(discount2.getId(), 100));
     }
 }
-
-
